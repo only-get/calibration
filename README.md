@@ -137,3 +137,10 @@ g_norm: 9.81007     # gravity magnitude
 
 ```
 会在指定路径下输出`extrinsic_parameter.csv` 即为外参
+### 2.2雷达IMU联合标定
+下载
+https://github.com/only-get/lidar-imu-calibration.git
+catkin_make
+打开雷达和imu驱动
+roslaunch lidar_imu_init robosense.launch
+同样 需要根据自己雷达IMU更改LiDAR_IMU_Init/config中的yaml文件
