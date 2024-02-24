@@ -68,12 +68,25 @@ git clone https://github.com/gaowenliang/imu_utils
 cd ..
 catkin_make #编译imu_utils
 ```
+**启动节点**
+```
+source devel/setup.bash
+sudo chmod 777 /dev/ttyUSB*
+roslaunch fdilink_ahrs ahrs_driver.launch 
+```
 **1.3雷达驱动**
 下载rslidar.zip，在`src/rslidar_sdk/config`路径中修改`config.yaml`适配自己的雷达
 `config.yaml`中主要修改
 ```  
      lidar_type: RS32             #LiDAR type - RS16, RS32, RSBP, RSHELIOS, RSHELIOS_16P, RS128, RS80, RS48, RSP128, RSP80, RSP48, 
-                                                    #             RSM1, RSM1_JUMBO, RSM2, RSE1
-      msop_port: 2370              #Msop port of lidar
-      difop_port: 8310             #Difop port of lidar
+                                                    #                          RSM1, RSM1_JUMBO, RSM2, RSE1
+      msop_port: 2370           #Msop port of lidar
+      difop_port: 8310            #Difop port of lidar
+```
+随后在工作空间目录
+```
+catkin_make
+source devel/setup.bash
+roslaunch rslidar_sdk start.launch
+
 ```
