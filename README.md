@@ -136,3 +136,4 @@ gyr_w: 2.0e-5       # gyroscope bias random work noise standard deviation.     #
 g_norm: 9.81007     # gravity magnitude
 
 ```
+会在指定路径下输出`extrinsic_parameter.csv` 即为外参
