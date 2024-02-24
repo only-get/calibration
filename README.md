@@ -33,7 +33,9 @@ roslaunch usb_cam usb_cam-test.launch
 ### 1.2IMU驱动安装
 
 **安装依赖项**
-```sudo apt-get install libdw-dev
+```
+sudo apt-get install libdw-dev
+
 ```
 imu_utils工具还需要ceres和eigen，本人已预装，具体安装步骤可以自行上网查阅。
 
