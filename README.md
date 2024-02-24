@@ -74,7 +74,7 @@ source devel/setup.bash
 sudo chmod 777 /dev/ttyUSB*
 roslaunch fdilink_ahrs ahrs_driver.launch 
 ```
-**1.3雷达驱动**
+### 1.3雷达驱动
 下载rslidar.zip，在`src/rslidar_sdk/config`路径中修改`config.yaml`适配自己的雷达
 `config.yaml`中主要修改
 ```  
@@ -88,5 +88,49 @@ roslaunch fdilink_ahrs ahrs_driver.launch
 catkin_make
 source devel/setup.bash
 roslaunch rslidar_sdk start.launch
+```
+## 二、联合标定
+### 2.1相机IMU联合标定
+基本原理使用VINS标定，VINS在没有预先标定数据使首先会进行标定。
+复制`VINS-Mono/src/config/euroc/euroc_config_no_extrinsic.yaml`为`my_config_no_extrinsic.yaml`
+修改
+```
+#1.topic名字以及标定数据的输出路径
+
+#common parameters
+imu_topic: "/fdi_imu"
+image_topic: "/usb_cam/image_raw"
+output_path: "/home/lee/VINS-Mono/"
+
+#2.相机内参
+
+#camera calibration
+model_type: PINHOLE
+camera_name: camera
+image_width: 1280
+image_height: 720
+distortion_parameters:
+   k1: -0.343742
+   k2: 0.138236
+   p1: 0.000245
+   p2: 0.000027
+projection_parameters:
+   fx: 1255.22916
+   fy: 1256.29546
+   cx: 661.3379
+   cy: 352.14235
+
+#3.有无外参 选择无外参
+
+estimate_extrinsic: 2
+
+#4.IMU内参
+
+#imu parameters       The more accurate parameters you provide, the better performance
+acc_n: 0.2          # accelerometer measurement noise standard deviation. #0.2
+gyr_n: 0.02         # gyroscope measurement noise standard deviation.     #0.05
+acc_w: 0.0002         # accelerometer bias random work noise standard deviation.  #0.02
+gyr_w: 2.0e-5       # gyroscope bias random work noise standard deviation.     #4.0e-5
+g_norm: 9.81007     # gravity magnitude
 
 ```
